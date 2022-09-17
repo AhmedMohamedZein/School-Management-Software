@@ -1,0 +1,8 @@
+
+# Dotenv variables
+.env
+
+
+
+# node packages
+node_modules
