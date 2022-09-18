@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/school-management-api/app.ts",
-    "lint": "eslint ./src/school-management-api/",
+    "startTS": "nodemon ./src/app.ts",
+    "lint": "eslint ./src/",
+    "start" : "rm -rf ./build/ && npx tsc && node ./build/app.js",
     "prettier": "prettier --config ./.prettierrc --write ./src/*/**.ts"
   },
   "author": "AhmedZein",
