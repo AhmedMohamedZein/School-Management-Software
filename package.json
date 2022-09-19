@@ -25,6 +25,7 @@
     "@types/prettier": "^2.7.0",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.2",
     "eslint": "^8.23.1",
     "nodemon": "^2.0.20",
