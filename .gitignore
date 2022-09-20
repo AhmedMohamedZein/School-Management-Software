@@ -1,8 +1,9 @@
 
+# build file 
+build
+
 # Dotenv variables
 .env
-
-
 
 # node packages
 node_modules
