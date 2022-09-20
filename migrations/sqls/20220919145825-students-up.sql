@@ -1,7 +1,7 @@
 /* Replace with your SQL commands */
 /* end date should be filed when the student graduated or exits the school */
 CREATE TABLE students (
-    NAME VARCHAR(100) NOT NULL,
+    NAME VARCHAR(70) NOT NULL,
     START_DATE date DEFAULT now(),
     END_DATE date DEFAULT NULL,
     PHONE_NUMBER VARCHAR(15) DEFAULT NULL,
