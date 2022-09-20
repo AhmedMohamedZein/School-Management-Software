@@ -3,7 +3,9 @@
         "driver" : "pg",
         "host": { "ENV" :"DATABASE_HOST"},
         "user": { "ENV" :"DATABASE_USER"},
+        "port" : {"ENV" : "DATABASE_PORT"},
         "password" : {"ENV" :"DATABASE_PASSWORD"},
-        "database" : { "ENV" :"DATABASE_NAME"}
+        "database" : { "ENV" :"DATABASE_NAME"},
+        "schema" : {"ENV" : "DATABASE_SCHEMA"}
     }
 }
