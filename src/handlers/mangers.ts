@@ -2,13 +2,15 @@ import { Application , Response , Request } from 'express';
 import { manager , managersConnectionDB } from '../modules/mangers';
 
 
-const mangerHandler = async ( app : Application ) : Promise<void> => {
+const managersHandler = async ( app : Application ) : Promise<void> => {
     // this endpint will return all mangers 
     // it will be helpful in the front page of the websit
     app.get ('/managers', index);
     // the managers by id will be used by the internal system to get the manager after authrization and authentication 
     app.get('/managers/:id', show);
-
+    // this will create a manager in the database but it will go throw sevrel middelware validation
+    // the only one that can create a manager is anther manager only !!
+    app.post('/managers/', create);
 }
 
 async function index( req : Request , res : Response ) : Promise<void>{
@@ -43,4 +45,26 @@ async function show( req : Request , res : Response ) : Promise<void>{
 
 }
 
-export default mangerHandler ;
+async function create ( req : Request , res : Response ) : Promise<void> {
+
+    // the schema of the manager is {  "name" , "salary" , "manager_id" }
+    // so we need to be expected a 3 values 
+    const requestedManager : manager = {
+        name : req.body.name , 
+        salary : req.body.salary ,
+        manager_id : req.body.manager_id
+    };
+
+    try {
+        const manager = new managersConnectionDB ();
+        const requestedData = await manager.create(requestedManager);
+        res.status(201).send('manager has been created').end();
+        return;
+
+    }catch {
+        res.status (500).send ('server error 500').end ();
+    }
+}
+
+
+export default managersHandler ;
