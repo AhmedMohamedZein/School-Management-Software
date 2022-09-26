@@ -1,10 +1,13 @@
 import express from 'express';
 import config from './config/config';
-import mangerHandler from './handlers/mangers';
+import managersHandler from './handlers/mangers';
+import bodyParser from 'body-parser';
+
 const app = express();
+app.use ( bodyParser.json() );
 
 // mangers end-point 
-mangerHandler(app);
+managersHandler(app);
 
 app.get('/', (req, res) => {
     res.status(200).send({message : 'Done sending'}).end();
