@@ -1,6 +1,6 @@
 import { Application , Response , Request } from 'express';
 import { manager , managersConnectionDB } from '../modules/mangers';
-
+import bodyValidation from '../validation/manager received data/createManagerValidation';
 
 const managersHandler = async ( app : Application ) : Promise<void> => {
     // this endpint will return all mangers 
@@ -10,7 +10,7 @@ const managersHandler = async ( app : Application ) : Promise<void> => {
     app.get('/managers/:id', show);
     // this will create a manager in the database but it will go throw sevrel middelware validation
     // the only one that can create a manager is anther manager only !!
-    app.post('/managers/', create);
+    app.post('/managers/' , bodyValidation , create);
 }
 
 async function index( req : Request , res : Response ) : Promise<void>{
