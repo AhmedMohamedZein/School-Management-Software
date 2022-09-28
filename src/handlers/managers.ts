@@ -1,16 +1,16 @@
-import { Application , Response , Request } from 'express';
-import { manager , managersConnectionDB } from '../modules/mangers';
+import { Router , Response , Request } from 'express';
+import { manager , managersConnectionDB } from '../modules/managers';
 import bodyValidation from '../validation/manager received data/createManagerValidation';
 
-const managersHandler = async ( app : Application ) : Promise<void> => {
+const managersHandler = async ( app : Router ) : Promise<void> => {
     // this endpint will return all mangers 
     // it will be helpful in the front page of the websit
-    app.get ('/managers', index);
+    app.get ('/', index);
     // the managers by id will be used by the internal system to get the manager after authrization and authentication 
-    app.get('/managers/:id', show);
+    app.get('/:id', show);
     // this will create a manager in the database but it will go throw sevrel middelware validation
     // the only one that can create a manager is anther manager only !!
-    app.post('/managers/' , bodyValidation , create);
+    app.post('/' , bodyValidation , create);
 }
 
 async function index( req : Request , res : Response ) : Promise<void>{
