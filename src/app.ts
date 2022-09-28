@@ -1,9 +1,9 @@
-import express from 'express';
+import express , { Application  , Request , Response } from 'express';
 import config from './config/config';
 import bodyParser from 'body-parser';
 
 
-const app = express();
+const app : Application = express();
 app.use ( bodyParser.json() );
 
 import manager from './routes/managers';
@@ -11,7 +11,7 @@ import manager from './routes/managers';
 app.use ( '/manager' , manager);
 
 
-app.get('/', (req, res) => {
+app.get('/', (req : Request , res : Response) => {
     res.status(200).send({message : 'Done sending'}).end();
 });
 
