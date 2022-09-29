@@ -1,13 +1,13 @@
 import { Router , Response , Request } from 'express';
 import { manager , managersConnectionDB } from '../modules/managers';
 import bodyValidation from '../validation/manager received data/createManagerValidation';
-
+import idValidation from '../validation/manager received data/getManagerById';
 const managersHandler = async ( app : Router ) : Promise<void> => {
     // this endpint will return all mangers 
     // it will be helpful in the front page of the websit
     app.get ('/', index);
     // the managers by id will be used by the internal system to get the manager after authrization and authentication 
-    app.get('/:id', show);
+    app.get('/:id' , idValidation , show);
     // this will create a manager in the database but it will go throw sevrel middelware validation
     // the only one that can create a manager is anther manager only !!
     app.post('/' , bodyValidation , create);
@@ -35,6 +35,10 @@ async function show( req : Request , res : Response ) : Promise<void>{
     try {
         const managers =  new managersConnectionDB();
         const requestedData = await managers.show(requestedManager);
+        if ( !requestedData ) {
+            res.status(400).send('This id does not exist !').end();
+            return;
+        }
         res.status(200).json( requestedData ).end();
         return;
     }
